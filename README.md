@@ -27,3 +27,25 @@ npm start
 ```
 
 First it will try for `.env`, if it isn't found it runs without it.
+
+## The Docker image of the server
+
+Using Docker the image of the server can be built locally: (In the example `project_o` tag is given)
+
+```bash
+docker build -t project_o .
+```
+
+When running the container we have the option to either use the default port (3000) or support the same `.env` file as before. The examples will run the container in detached mode.
+
+Without `.env`:
+
+```bash
+docker run -d -p LOCAL_PORT:3000 project_o
+```
+
+With `.env`:
+
+```bash
+docker run -d --env-file .env -p LOCAL_PORT:ENV_PORT project_o
+```
