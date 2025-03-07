@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-o-service
+  namespace: project-o-namespace
+spec:
+  selector:
+    app: project-o
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+  type: LoadBalancer

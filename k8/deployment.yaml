@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-o
+  namespace: project-o-namespace
+  labels:
+    app: project-o
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: project-o
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: project-o
+        tier: backend
+    spec: 
+      containers:
+      - name: project-o
+        image: 794038210581.dkr.ecr.eu-west-2.amazonaws.com/majorosgereby/project_o
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
