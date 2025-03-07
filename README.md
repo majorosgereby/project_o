@@ -113,3 +113,31 @@ With eksctl and kubectl the whole process can be run from this repository.
 - `kubectl get service -n project-o-namespace` will provide the required external-ip address to the application. It is running on port 80, http.
 
 Everything could be deleted from the repository too: [kubectl_delete_commands.sh](./k8/kubectl_delete_commands.sh) has all the commands to remove the deplyoment from the cluster and [cluster_delete.sh](./k8/cluster_delete.sh) contains the neccesery command to remove the cluster entirely.
+
+## Terraform deployment
+
+This configuration fully handles the tasks in the previous configuration: creates the cluster on AWS and deploys the application via Terraform. THe cluster creation is heavily based on [this Hashicorp tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks).
+
+### Creating the deployment
+
+Navigate to the `tf` folder. Then use these 2 commands to initialize and create the configuration.
+
+```bash
+terraform init
+terraform apply -auto-approve
+```
+
+Kubectl (kubeconfig) can be updated via:
+
+```bash
+$ aws eks --region $(terraform output -raw region) update-kubeconfig \
+    --name $(terraform output -raw cluster_name)
+```
+
+### Destroying the deployment
+
+Terraform can destroy the resources too:
+
+```bash
+terraform destroy -auto-approve
+```
