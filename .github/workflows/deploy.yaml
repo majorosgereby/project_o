@@ -34,5 +34,5 @@ jobs:
           ECR_REPOSITORY: majorosgereby/project_o
           IMAGE_TAG: latest
         run: |
-          DOCKER_BUILDKIT=1 docker build --progress=plain -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          DOCKER_BUILDKIT=1 docker build --progress=plain -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./server
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
