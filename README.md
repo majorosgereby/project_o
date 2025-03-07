@@ -101,3 +101,15 @@ And these few lines have to be updated in the yaml file to run:
 ```yaml
           ECR_REPOSITORY: <ECR_REPOSITORY_NAME>
 ```
+
+## Kubernetes deployment
+
+The application can be deployed from ECR to an AWS cluster.
+
+With eksctl and kubectl the whole process can be run from this repository.
+
+- [cluster_create.sh](./k8/cluster_create.sh) creates a cluster with 2 nodes on AWS.
+- [kubectl_apply_commands.sh](./k8/kubectl_apply_commands.sh) creates the [namespace](./k8/namespace.yaml), the [deployment](./k8/deployment.yaml) and the [service](./k8/service.yaml) to run the application.
+- `kubectl get service -n project-o-namespace` will provide the required external-ip address to the application. It is running on port 80, http.
+
+Everything could be deleted from the repository too: [kubectl_delete_commands.sh](./k8/kubectl_delete_commands.sh) has all the commands to remove the deplyoment from the cluster and [cluster_delete.sh](./k8/cluster_delete.sh) contains the neccesery command to remove the cluster entirely.
